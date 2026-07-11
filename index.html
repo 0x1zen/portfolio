@@ -25,7 +25,7 @@
     .pf-sec-head h2{font-size:34px!important}
     .pf-ai-card{padding:30px 20px!important}
     .pf-ai-card h2{font-size:32px!important}
-    .pf-proj-alt .pf-carousel{order:-1}
+    .pf-proj-alt > div:has(.pf-carousel){order:-1}
   }
   /* Carousel */
   .pf-carousel{position:relative;aspect-ratio:1876/882;border-radius:14px;overflow:hidden;border:1px solid #ddd0ba;box-shadow:0 4px 18px rgba(42,38,32,0.08)}
@@ -195,6 +195,7 @@
     </div>
 
     <article class="pf-grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;padding:36px 0;border-top:1px solid #ece3d2">
+      <div>
       <div class="pf-carousel" data-index="0">
         <div class="pf-carousel-track">
           <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783358949/Screenshot_2026-07-06_225849_ske6z7.png" alt="easyurl.in My Links dashboard"></div>
@@ -209,6 +210,14 @@
           <button class="pf-dot" aria-label="Go to image 2"></button>
           <button class="pf-dot" aria-label="Go to image 3"></button>
           <button class="pf-dot" aria-label="Go to image 4"></button>
+        </div>
+      </div>
+        <div style="margin-top:14px;border:1px solid #ddd0ba;border-radius:12px;padding:12px 14px;background:#faf5ec">
+          <div style="font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7d68;margin-bottom:8px">Test credentials</div>
+          <div style="display:flex;flex-direction:column;gap:4px;font-family:'Spline Sans Mono',monospace;font-size:12.5px;color:#544d42">
+            <div><span style="color:#8a7d68">Email:</span> testauth1783182622967@example.com</div>
+            <div><span style="color:#8a7d68">Password:</span> TestPass123</div>
+          </div>
         </div>
       </div>
       <div>
@@ -254,14 +263,15 @@
         <h3 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;letter-spacing:-0.01em;margin-bottom:10px">Intern Flow — AI-Powered Internship Management</h3>
         <ul style="font-size:15px;color:#544d42;margin-bottom:16px;padding-left:18px;display:flex;flex-direction:column;gap:7px">
           <li>Built a 7-role internship pipeline (HR, Mentor, Referrer, IT, Security, Legal, Program Owner) with a stage-gated workflow engine enforcing valid transitions across an 8-stage happy-path lifecycle, from referral to certificate issuance</li>
-          <li>AI resume parsing with a dual-provider fallback chain -  Anthropic Claude primary, Gemini Flash fallback - processed asynchronously via BullMQ with live status pushed to the client over SSE</li>
+          <li>AI resume parsing with a dual-provider fallback chain - Anthropic Claude primary, Gemini Flash fallback - processed asynchronously via BullMQ with live status pushed to the client over SSE</li>
           <li>NDA e-signature flow using single-use Redis tokens with 7-day TTL, advancing the workflow atomically on signature and firing role-scoped notifications on completion</li>
           <li>SLA monitoring with automatic breach detection and 3-tier escalation, backed by a startup recovery scan and 30-minute re-enqueue sweep so scheduled reminders survive Redis restarts or worker downtime</li>
-          <li>Real-time in-app notifications over WebSockets, grouped by referral and scoped per role, alongside a cost-optimized AI FAQ assistant that only invokes the LLM for 5 of 12 query types and the rest resolve from parameterized SQL</li>
+          <li>Real-time in-app notifications over WebSockets, grouped by referral and scoped per role, alongside a cost-optimized AI FAQ assistant that only invokes the LLM for 5 of 12 query types the rest resolve from parameterized SQL</li>
           <li>Migrated the self-hosted stack (Postgres, Redis, MinIO) from AWS (RDS/S3) to a bare-metal Oracle Cloud ARM64 VM via Docker Compose, isolating database roles and Docker bridge networking from a second production app on the same host</li>
         </ul>
         <a href="http://129.154.240.121:5100/" target="_blank" rel="noopener" style="display:inline-block;font-size:14px;font-weight:600;color:#fff;background:var(--accent);padding:9px 18px;border-radius:999px;text-decoration:none">See live ↗</a>
       </div>
+      <div>
       <div class="pf-carousel" data-index="0">
         <div class="pf-carousel-track">
           <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783767711/Screenshot_2026-07-11_160412_hxpsq8.png" alt="Intern Flow screenshot 1"></div>
@@ -278,6 +288,14 @@
           <button class="pf-dot" aria-label="Go to image 3"></button>
           <button class="pf-dot" aria-label="Go to image 4"></button>
           <button class="pf-dot" aria-label="Go to image 5"></button>
+        </div>
+      </div>
+        <div style="margin-top:14px;border:1px solid #ddd0ba;border-radius:12px;padding:12px 14px;background:#faf5ec">
+          <div style="font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7d68;margin-bottom:8px">Test credentials</div>
+          <div style="display:flex;flex-direction:column;gap:4px;font-family:'Spline Sans Mono',monospace;font-size:12.5px;color:#544d42">
+            <div><span style="color:#8a7d68">Email:</span> rajdubalwork@gmail.com</div>
+            <div><span style="color:#8a7d68">Password:</span> TestPass123</div>
+          </div>
         </div>
       </div>
     </article>
@@ -471,7 +489,7 @@
 
 </main>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Scrollspy
   const sections = ['about','experience','projects','ai','certifications','skills','education','contact'];
   const links = document.querySelectorAll('.nav-link');
