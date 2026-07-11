@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raj Dubal — Full-Stack Developer</title>
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783359197/favicon_wefcou.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#f7f1e7;color:#2a2620;font-family:'Hanken Grotesk',system-ui,sans-serif;min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:#e8b48f;color:#2a2620}
+  a{color:inherit}
+  :root{--accent:#b5552f}
+  @media (max-width:760px){
+    .pf-nav-links{display:none!important}
+    .pf-hero-h1{font-size:46px!important}
+    .pf-grid2{grid-template-columns:1fr!important}
+    .pf-hero{grid-template-columns:1fr!important;gap:40px!important}
+    .pf-avatar{order:-1}
+    .pf-sec-head{flex-direction:column;align-items:flex-start!important;gap:4px}
+    .pf-sec-head h2{font-size:34px!important}
+    .pf-ai-card{padding:30px 20px!important}
+    .pf-ai-card h2{font-size:32px!important}
+    .pf-proj-alt .pf-carousel{order:-1}
+  }
+  /* Carousel */
+  .pf-carousel{position:relative;aspect-ratio:1876/882;border-radius:14px;overflow:hidden;border:1px solid #ddd0ba;box-shadow:0 4px 18px rgba(42,38,32,0.08)}
+  .pf-carousel-track{display:flex;height:100%;transition:transform .45s cubic-bezier(.4,.0,.2,1)}
+  .pf-slide{flex:0 0 100%;height:100%;position:relative;display:flex;align-items:flex-end;padding:16px;background:#ece2ce;background-image:repeating-linear-gradient(135deg,#efe5d3 0 14px,#ead9bf 14px 28px)}
+  .pf-slide:has(img){background-image:none;background:#efe6d4}
+  .pf-slide img{width:100%;height:100%;object-fit:cover;object-position:top;filter:sepia(0.30) saturate(0.75) contrast(0.96) brightness(1.03);mix-blend-mode:multiply;transition:filter .35s ease,mix-blend-mode .35s ease}
+  .pf-carousel:hover .pf-slide img{filter:none;mix-blend-mode:normal}
+  .pf-slide-label{font-family:'Spline Sans Mono',monospace;font-size:12px;color:#7a6f59;background:rgba(247,241,231,0.85);padding:4px 9px;border-radius:6px}
+  .pf-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:none;border-radius:50%;background:rgba(247,241,231,0.92);color:#2a2620;box-shadow:0 2px 10px rgba(42,38,32,0.15);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1;transition:background .15s,transform .15s;opacity:0;pointer-events:none}
+  .pf-carousel:hover .pf-arrow{opacity:1;pointer-events:auto}
+  .pf-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.08)}
+  .pf-arrow.prev{left:12px}
+  .pf-arrow.next{right:12px}
+  .pf-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:7px}
+  .pf-dot{width:7px;height:7px;border-radius:50%;border:none;padding:0;background:rgba(42,38,32,0.25);cursor:pointer;transition:background .2s,width .2s}
+  .pf-dot.active{background:var(--accent);width:18px;border-radius:4px}
+  @media (max-width:760px){ .pf-arrow{opacity:1;pointer-events:auto} }
+
+  /* Animated section cards */
+  @keyframes pf-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  @keyframes pf-blink{0%,45%{opacity:1}55%,100%{opacity:0}}
+  @keyframes pf-scan{0%,100%{top:44px;opacity:0}20%,80%{opacity:1}50%{top:calc(100% - 40px)}}
+  @keyframes pf-cell{0%,100%{opacity:.18}50%{opacity:1}}
+  .pf-panel{position:relative;background:#2a2620;border-radius:14px;padding:20px 22px 24px;box-shadow:0 18px 40px -18px rgba(42,38,32,0.55),inset 0 1px 0 rgba(255,255,255,0.05);overflow:hidden;animation:pf-float 6s ease-in-out infinite}
+  .pf-scan::before{content:"";position:absolute;left:14px;right:14px;top:44px;height:26px;border-radius:6px;background:rgba(181,85,47,0.14);animation:pf-scan 5.5s ease-in-out infinite;pointer-events:none}
+  .pf-dots-row{display:flex;gap:7px;margin-bottom:18px}
+  .pf-dots-row span{width:11px;height:11px;border-radius:50%}
+  .pf-code{position:relative;font-family:'Spline Sans Mono',monospace;font-size:13px;line-height:1.9;color:#e8ddc9;white-space:pre;z-index:1}
+  .pf-cur{display:inline-block;width:8px;height:15px;background:#e8b48f;vertical-align:-2px;margin-left:2px;animation:pf-blink 1.05s step-end infinite}
+  .tk-k{color:#e8b48f}.tk-s{color:#9fbf8f}.tk-n{color:#d9a06b}.tk-p{color:#8a8170}.tk-c{color:#6f6857}.tk-ok{color:#8fb573}
+  .pf-grid-cells{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;position:relative;z-index:1}
+  .pf-cell{aspect-ratio:1;border-radius:3px;background:#5f8f4c;animation:pf-cell 3s ease-in-out infinite}
+
+  /* Hero avatar animation */
+  @keyframes pf-spin{to{transform:rotate(360deg)}}
+  @keyframes pf-pulse{0%,100%{transform:scale(1);opacity:.45}50%{transform:scale(1.06);opacity:.8}}
+  .pf-avatar-glow{position:absolute;inset:-12px;border-radius:50%;background:radial-gradient(circle,rgba(232,180,143,0.5),transparent 70%);animation:pf-pulse 5s ease-in-out infinite;pointer-events:none}
+  .pf-avatar-ring{position:absolute;inset:-24px;border-radius:50%;border:2px dashed rgba(181,85,47,0.45);animation:pf-spin 26s linear infinite;pointer-events:none}
+  .pf-orbit{position:absolute;inset:-24px;animation:pf-spin 14s linear infinite;pointer-events:none}
+  .pf-orbit span{position:absolute;top:-6px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(181,85,47,0.15)}
+
+  @media (prefers-reduced-motion:reduce){
+    .pf-panel,.pf-scan::before,.pf-cur,.pf-cell,.pf-avatar-glow,.pf-avatar-ring,.pf-orbit{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(8px);background:rgba(247,241,231,0.82);border-bottom:1px solid #e7ddcc">
+  <nav style="max-width:1080px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between">
+    <a href="#top" style="text-decoration:none;display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-0.01em">
+      <span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;font-family:'Spline Sans Mono',monospace;font-size:14px;font-weight:500">R</span>
+      Raj Dubal
+    </a>
+    <div class="pf-nav-links" style="display:flex;align-items:center;gap:30px">
+      <a href="#about"          class="nav-link" data-section="about"          style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">About</a>
+      <a href="#experience"     class="nav-link" data-section="experience"     style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">Experience</a>
+      <a href="#projects"       class="nav-link" data-section="projects"       style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">Personal Projects</a>
+      <a href="#ai"             class="nav-link" data-section="ai"             style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">AI</a>
+      <a href="#certifications" class="nav-link" data-section="certifications" style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">Certifications</a>
+      <a href="#skills"         class="nav-link" data-section="skills"         style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">Skills</a>
+      <a href="#education"      class="nav-link" data-section="education"      style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">Education</a>
+      <a href="#contact" style="text-decoration:none;font-size:14px;font-weight:600;color:#fff;background:#2a2620;padding:8px 16px;border-radius:999px">Get in touch</a>
+    </div>
+  </nav>
+</header>
+
+<main style="max-width:1080px;margin:0 auto;padding:0 32px" id="top">
+
+  <!-- HERO -->
+  <section class="pf-hero" style="padding:96px 0 80px;display:grid;grid-template-columns:1fr auto;gap:64px;align-items:center">
+    <div>
+      <p style="font-family:'Spline Sans Mono',monospace;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:22px">Full-Stack Developer</p>
+      <h1 class="pf-hero-h1" style="font-family:'Newsreader',serif;font-weight:500;font-size:64px;line-height:1.05;letter-spacing:-0.02em;max-width:16ch;margin-bottom:26px">Building scalable web applications, powered by AI.</h1>
+      <p style="font-size:19px;max-width:52ch;color:#544d42;margin-bottom:36px">I'm Raj Dubal, a <b>AWS Certified</b> Full-Stack Software Engineer with <b>2+ years</b> of experience delivering scalable, business-critical applications. Recognized for leading high-impact, revenue-driving solutions including a <b>3 trillion USD</b> index delivery project for the London Stock Exchange Group (LSEG) through an AI-first engineering approach, building reliable software that creates measurable business value.
+</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+        <a href="#projects" style="text-decoration:none;font-size:15px;font-weight:600;color:#fff;background:var(--accent);padding:12px 22px;border-radius:999px">View my work</a>
+        <a href="https://linkedin.com/in/raj-dubal" target="_blank" rel="noopener" style="text-decoration:none;font-size:15px;font-weight:500;color:#2a2620;padding:12px 18px;border:1px solid #d9cdb8;border-radius:999px">LinkedIn</a>
+        <a href="https://leetcode.com/u/0x1zen/" target="_blank" rel="noopener" style="text-decoration:none;font-size:15px;font-weight:500;color:#2a2620;padding:12px 18px;border:1px solid #d9cdb8;border-radius:999px">LeetCode</a>
+        <a href="https://github.com/0x1zen" target="_blank" rel="noopener" style="text-decoration:none;font-size:15px;font-weight:500;color:#2a2620;padding:12px 18px;border:1px solid #d9cdb8;border-radius:999px">GitHub</a>
+      </div>
+    </div>
+    <div class="pf-avatar" style="position:relative;flex-shrink:0">
+      <div class="pf-avatar-glow"></div>
+      <div style="position:absolute;inset:-14px;border-radius:50%;background-image:repeating-linear-gradient(135deg,#efe5d3 0 12px,#ead9bf 12px 24px);opacity:0.6"></div>
+      <div class="pf-avatar-ring"></div>
+      <div class="pf-orbit"><span></span></div>
+      <img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783363246/RAJ_DUBAL_PICTURE_iyaux7.png" alt="Raj Dubal" style="position:relative;width:240px;height:240px;border-radius:50%;border:6px solid #f7f1e7;box-shadow:0 8px 30px rgba(42,38,32,0.12);object-fit:cover;display:block">
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" style="padding:72px 0;border-top:1px solid #e7ddcc">
+    <div class="pf-grid2" style="display:grid;grid-template-columns:0.55fr 1fr;gap:56px">
+      <div>
+        <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#8a8170;margin-bottom:24px">About</p>
+        <div class="pf-panel pf-scan" aria-hidden="true">
+          <div class="pf-dots-row"><span style="background:#e0684a"></span><span style="background:#e0a94a"></span><span style="background:#7aa86b"></span></div>
+<div class="pf-code"><span class="tk-k">const</span> raj = {
+  role<span class="tk-p">:</span> <span class="tk-s">"Full-Stack Engineer"</span>,
+  focus<span class="tk-p">:</span> [<span class="tk-s">"AI"</span>, <span class="tk-s">"Web"</span>, <span class="tk-s">"Cloud"</span>],
+  years<span class="tk-p">:</span> <span class="tk-n">2</span>,
+  shipping<span class="tk-p">:</span> <span class="tk-k">true</span><span class="pf-cur"></span>
+}</div>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:'Newsreader',serif;font-size:26px;line-height:1.45;color:#2a2620;margin-bottom:24px">Dynamic and results-oriented Full-Stack Software Engineer with 2+ years of experience designing, developing, and deploying scalable, business-critical web applications.</p>
+        <p style="font-size:17px;color:#544d42;margin-bottom:18px">Recognized by <b>senior leadership within the London Stock Exchange Group (LSEG)</b> Index Delivery organization for delivering high-impact solutions in the Capital Markets domain through an AI-first engineering approach.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" style="padding:72px 0;border-top:1px solid #e7ddcc">
+    <div class="pf-grid2" style="display:grid;grid-template-columns:0.55fr 1fr;gap:56px">
+      <div>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:40px;letter-spacing:-0.02em;margin-bottom:10px">Experience</h2>
+        <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#8a8170">Resume</p>
+        <a href="#" style="display:inline-block;margin-top:22px;font-size:14px;font-weight:600;color:#2a2620;border:1px solid #d9cdb8;padding:9px 16px;border-radius:999px;text-decoration:none">Download résumé (PDF)</a>
+        <div class="pf-panel pf-scan" aria-hidden="true" style="margin-top:28px;animation-delay:-2s">
+          <div class="pf-dots-row"><span style="background:#e0684a"></span><span style="background:#e0a94a"></span><span style="background:#7aa86b"></span></div>
+<div class="pf-code"><span class="tk-c">$ ./deliver --prod</span>
+<span class="tk-ok">✓</span> requirements   <span class="tk-p">analysed</span>
+<span class="tk-ok">✓</span> build          <span class="tk-p">passing</span>
+<span class="tk-ok">✓</span> deploy         <span class="tk-p">live</span>
+<span class="tk-k">→</span> impact <span class="tk-n">$3T</span> index<span class="pf-cur"></span></div>
+        </div>
+      </div>
+      <div>
+        <div style="padding:22px 0;border-top:1px solid #ece3d2;display:grid;grid-template-columns:auto 1fr;gap:28px">
+          <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8a8170;white-space:nowrap;padding-top:4px">2024 — Now</div>
+          <div>
+            <h3 style="font-size:18px;font-weight:600;margin-bottom:2px">Software Engineer Level 1</h3>
+            <p style="font-size:14px;color:var(--accent);font-weight:500;margin-bottom:10px">Hexaware Technologies, Mumbai</p>
+            <p style="font-size:15px;color:#544d42;margin-bottom:8px">Project:- <b>London Stock Exchange Group(LSEG) - Index Delivery Team</b></p>
+            <ul style="font-size:15px;color:#544d42;padding-left:18px;display:flex;flex-direction:column;gap:6px">
+              <li>
+  Delivered business-critical stock market index and financial data products for the London Stock Exchange Group (LSEG), serving global clients including <b>Vanguard</b>, <b>BlackRock</b>, <b>J.P. Morgan</b>, and <b>CME Group</b>.
+</li>
+<li>
+  Led the delivery of a <b>USD 3 trillion LSEG project</b>, driving high-impact business solutions through an AI-first engineering approach that accelerated delivery while ensuring reliability and operational excellence.
+</li>
+
+<li>
+  Translated complex business requirements into scalable, production-ready solutions while <b>collaborating with cross-functional teams</b> to ensure accuracy, reliability, and timely delivery.
+</li>
+
+<li>
+  Owned the complete software development lifecycle from requirement analysis and development to testing, production deployment, and post-release support ensuring <b>high quality enterprise products.</b>
+</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" style="padding:72px 0;border-top:1px solid #e7ddcc">
+    <div class="pf-sec-head" style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:44px">
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:40px;letter-spacing:-0.02em">Personal Projects</h2>
+      <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#8a8170">Projects</p>
+    </div>
+
+    <article class="pf-grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;padding:36px 0;border-top:1px solid #ece3d2">
+      <div class="pf-carousel" data-index="0">
+        <div class="pf-carousel-track">
+          <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783358949/Screenshot_2026-07-06_225849_ske6z7.png" alt="easyurl.in My Links dashboard"></div>
+          <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783358801/Screenshot_2026-07-06_225542_gnecpk.png" alt="easyurl.in landing page"></div>
+          <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783359156/Screenshot_2026-07-06_230156_wfpodt.png" alt="easyurl.in analytics charts"></div>
+          <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783359155/Screenshot_2026-07-06_230215_nerm3d.png" alt="easyurl.in link analytics detail"></div>
+        </div>
+        <button class="pf-arrow prev" aria-label="Previous image">&#8249;</button>
+        <button class="pf-arrow next" aria-label="Next image">&#8250;</button>
+        <div class="pf-dots">
+          <button class="pf-dot active" aria-label="Go to image 1"></button>
+          <button class="pf-dot" aria-label="Go to image 2"></button>
+          <button class="pf-dot" aria-label="Go to image 3"></button>
+          <button class="pf-dot" aria-label="Go to image 4"></button>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">React</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Node.js</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">PostgreSQL</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Redis</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Typescript</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Docker</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Express</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">nginx</span>
+        </div>
+        <h3 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;letter-spacing:-0.01em;margin-bottom:10px">easyurl.in — URL Shortener &amp; Analytics</h3>
+        <ul style="font-size:15px;color:#544d42;margin-bottom:16px;padding-left:18px;display:flex;flex-direction:column;gap:7px">
+          <li>Developed a full-stack URL shortener with real-time click analytics breakdowns by country, device, browser, OS and language</li>
+          <li>Implemented Redis cache-aside pattern for sub-millisecond redirects with 15-minute TTL and immediate invalidation on link updates</li>
+          <li>Analytics engine with dynamic time bucketing daily/weekly/monthly GROUP BY switching based on date range to prevent chart compression</li>
+          <li>Anonymous shortening with IP-based rate limiting (3 links/3 hours) tracked in Postgres; authenticated accounts get permanent links with full analytics</li>
+          <li>Google Safe Browsing v4 integration with a local domain escalation system 5+ flags on the same domain triggers an admin review queue</li>
+          <li>Deployed on Oracle Cloud ARM64 VM with Docker multi-stage builds, nginx reverse proxy, and Let's Encrypt SSL</li>
+        </ul>
+        <a href="https://easyurl.in/" target="_blank" rel="noopener" style="display:inline-block;font-size:14px;font-weight:600;color:#fff;background:var(--accent);padding:9px 18px;border-radius:999px;text-decoration:none">See live ↗</a>
+      </div>
+    </article>
+
+    <article class="pf-grid2 pf-proj-alt" style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;padding:36px 0;border-top:1px solid #ece3d2">
+      <div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Node.js</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">PostgreSQL</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Redis</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">BullMQ</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">WebSockets</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">SSE</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Claude</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Gemini Flash</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Docker</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Oracle Cloud</span>
+        </div>
+        <h3 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;letter-spacing:-0.01em;margin-bottom:10px">Intern Flow — AI-Powered Internship Management</h3>
+        <ul style="font-size:15px;color:#544d42;margin-bottom:16px;padding-left:18px;display:flex;flex-direction:column;gap:7px">
+          <li>Built a 7-role internship pipeline (HR, Mentor, Referrer, IT, Security, Legal, Program Owner) with a stage-gated workflow engine enforcing valid transitions across an 8-stage happy-path lifecycle, from referral to certificate issuance</li>
+          <li>AI resume parsing with a dual-provider fallback chain — Anthropic Claude primary, Gemini Flash fallback — processed asynchronously via BullMQ with live status pushed to the client over SSE</li>
+          <li>NDA e-signature flow using single-use Redis tokens with 7-day TTL, advancing the workflow atomically on signature and firing role-scoped notifications on completion</li>
+          <li>SLA monitoring with automatic breach detection and 3-tier escalation, backed by a startup recovery scan and 30-minute re-enqueue sweep so scheduled reminders survive Redis restarts or worker downtime</li>
+          <li>Real-time in-app notifications over WebSockets, grouped by referral and scoped per role, alongside a cost-optimized AI FAQ assistant that only invokes the LLM for 5 of 12 query types — the rest resolve from parameterized SQL</li>
+          <li>Migrated the self-hosted stack (Postgres, Redis, MinIO) from AWS (RDS/S3) to a bare-metal Oracle Cloud ARM64 VM via Docker Compose, isolating database roles and Docker bridge networking from a second production app on the same host</li>
+        </ul>
+        <a href="http://129.154.240.121:5100/" target="_blank" rel="noopener" style="display:inline-block;font-size:14px;font-weight:600;color:#fff;background:var(--accent);padding:9px 18px;border-radius:999px;text-decoration:none">See live ↗</a>
+      </div>
+      <div class="pf-carousel" data-index="0">
+        <div class="pf-carousel-track">
+          <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783767711/Screenshot_2026-07-11_160412_hxpsq8.png" alt="Intern Flow screenshot 1"></div>
+          <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783767711/Screenshot_2026-07-11_160540_cj7qv5.png" alt="Intern Flow screenshot 2"></div>
+          <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783767711/Screenshot_2026-07-11_160830_fmzl2n.png" alt="Intern Flow screenshot 3"></div>
+          <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783767711/Screenshot_2026-07-11_160853_yddgnd.png" alt="Intern Flow screenshot 4"></div>
+          <div class="pf-slide"><img src="https://res.cloudinary.com/dwokx2ugh/image/upload/v1783767711/Screenshot_2026-07-11_161011_cqgrmr.png" alt="Intern Flow screenshot 5"></div>
+        </div>
+        <button class="pf-arrow prev" aria-label="Previous image">&#8249;</button>
+        <button class="pf-arrow next" aria-label="Next image">&#8250;</button>
+        <div class="pf-dots">
+          <button class="pf-dot active" aria-label="Go to image 1"></button>
+          <button class="pf-dot" aria-label="Go to image 2"></button>
+          <button class="pf-dot" aria-label="Go to image 3"></button>
+          <button class="pf-dot" aria-label="Go to image 4"></button>
+          <button class="pf-dot" aria-label="Go to image 5"></button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- AI SECTION -->
+  <section id="ai" style="padding:72px 0;border-top:1px solid #e7ddcc">
+    <div class="pf-ai-card" style="background:#2a2620;color:#f3ead9;border-radius:22px;padding:56px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 85% 15%,rgba(181,85,47,0.35),transparent 45%);pointer-events:none"></div>
+      <div style="position:relative">
+        <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#e8b48f;margin-bottom:18px">AI in my work</p>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:40px;letter-spacing:-0.02em;max-width:20ch;margin-bottom:16px">Where AI made my work measurably better.</h2>
+        <p style="font-size:17px;color:#cbbfa9;max-width:60ch;margin-bottom:40px">A selection of AI initiatives I designed, built, and championed to accelerate engineering, automate workflows, and deliver measurable business impact.</p>
+
+        <div class="pf-grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(232,180,143,0.18);border-radius:14px;padding:22px">
+            <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#e8b48f;margin-bottom:10px">AI-DRIVEN PRODUCT KNOWLEDGE BASE PIPELINE</div>
+            <ul style="font-size:15px;color:#f3ead9;line-height:1.5;padding-left:18px;display:flex;flex-direction:column;gap:7px">
+              <li>Designed an automation pipeline that extracts product data into structured JSON, then feeds it to an LLM to auto-generate structured .md analysis documents.</li>
+              <li>Slashed developer analysis time by <b>98% (from 2 days to 30 minutes)</b>, significantly reducing resource dependency and accelerating overall project delivery for the business.</li>
+            </ul>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(232,180,143,0.18);border-radius:14px;padding:22px">
+            <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#e8b48f;margin-bottom:10px">INTERN FLOW — AI-POWERED INTERNSHIP MANAGEMENT PLATFORM</div>
+            <ul style="font-size:15px;color:#f3ead9;line-height:1.5;padding-left:18px;display:flex;flex-direction:column;gap:7px">
+              <li>Led end-to-end development of an AI-augmented workflow platform for <b>Hexaware's internship lifecycle</b>, including <b>AI resume parsing (Gemini Flash)</b> and an AI FAQ chatbot.</li>
+              <li>Decreased HR overhead by <b>90%</b> by centralizing months of parallel email communications into a single platform.</li>
+            </ul>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(232,180,143,0.18);border-radius:14px;padding:22px">
+            <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#e8b48f;margin-bottom:10px">AI-ASSISTED TESTING INITIATIVE</div>
+            <ul style="font-size:15px;color:#f3ead9;line-height:1.5;padding-left:18px;display:flex;flex-direction:column;gap:7px">
+              <li>Pioneered the implementation of tSQLt testing within the department, leveraging <b>GitHub Copilot</b> to rapidly author test scripts and accelerate codebase comprehension.</li>
+              <li>Established a new quality assurance standard that was subsequently <b>adopted by the entire engineering team</b>.</li>
+            </ul>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(232,180,143,0.18);border-radius:14px;padding:22px">
+            <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#e8b48f;margin-bottom:10px">AI TOOLING &amp; REVERSE MENTORSHIP</div>
+            <ul style="font-size:15px;color:#f3ead9;line-height:1.5;padding-left:18px;display:flex;flex-direction:column;gap:7px">
+              <li>Reverse-mentored <b>senior engineers (15+ years of experience)</b> on implementing effective AI-assisted development workflows.</li>
+              <li>Successfully drove the upward adoption of modern AI tooling across the organization, boosting developer productivity and demonstrating technical leadership.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" style="padding:72px 0;border-top:1px solid #e7ddcc">
+    <div class="pf-sec-head" style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px">
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:40px;letter-spacing:-0.02em">Certifications</h2>
+      <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#8a8170">Certifications</p>
+    </div>
+    <div class="pf-grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div style="background:#fbf7ef;border:1px solid #ece3d2;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <div>
+            <h3 style="font-size:18px;font-weight:600;margin-bottom:3px">AWS Certified Cloud Practitioner</h3>
+            <p style="font-size:14px;color:var(--accent);font-weight:500">Amazon Web Services</p>
+          </div>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8a8170;white-space:nowrap">Issue Date:- 2025</span>
+        </div>
+        <a href="https://drive.google.com/file/d/1xbFNpjP3vKXJx_6p23qiZOBAASkf28w8/view?usp=sharing" target="_blank" rel="noopener" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#2a2620;border:1px solid #d9cdb8;padding:8px 15px;border-radius:999px;text-decoration:none">View certificate ↗</a>
+      </div>
+      <div style="background:#fbf7ef;border:1px solid #ece3d2;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <div>
+            <h3 style="font-size:18px;font-weight:600;margin-bottom:3px">Postman Student Expert</h3>
+            <p style="font-size:14px;color:var(--accent);font-weight:500">Postman</p>
+          </div>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8a8170;white-space:nowrap">Issue Date:- 2025</span>
+        </div>
+        <a href="https://drive.google.com/file/d/1VTtKy1dME8twTUpmer8n7cmnXIcT5kfJ/view?usp=sharing" target="_blank" rel="noopener" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#2a2620;border:1px solid #d9cdb8;padding:8px 15px;border-radius:999px;text-decoration:none">View certificate ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" style="padding:72px 0;border-top:1px solid #e7ddcc">
+    <div class="pf-sec-head" style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px">
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:40px;letter-spacing:-0.02em">Skills &amp; tools</h2>
+      <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#8a8170">Skills</p>
+    </div>
+    <div class="pf-grid2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px">
+      <div style="background:#fbf7ef;border:1px solid #ece3d2;border-radius:14px;padding:22px">
+        <h3 style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#8a8170;margin-bottom:14px">Frontend</h3>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <span style="font-size:15px;color:#3a352d;font-weight:500">React.js</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">TypeScript / Javascript</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">HTML &amp; CSS</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Tailwind / UI</span>
+        </div>
+      </div>
+      <div style="background:#fbf7ef;border:1px solid #ece3d2;border-radius:14px;padding:22px">
+        <h3 style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#8a8170;margin-bottom:14px">Backend</h3>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Node.js</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Express.js</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">REST APIs</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Auth &amp; Sessions</span>
+        </div>
+      </div>
+      <div style="background:#fbf7ef;border:1px solid #ece3d2;border-radius:14px;padding:22px">
+        <h3 style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#8a8170;margin-bottom:14px">Database</h3>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <span style="font-size:15px;color:#3a352d;font-weight:500">T-SQL</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">PostgreSQL</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Schema design</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Query tuning</span>
+        </div>
+      </div>
+      <div style="background:#fbf7ef;border:1px solid #ece3d2;border-radius:14px;padding:22px">
+        <h3 style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#8a8170;margin-bottom:14px">Tools &amp; AI</h3>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Git &amp; GitHub</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">AI / LLM APIs</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Jira / Confluence</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Microsoft Excel</span>
+        </div>
+      </div>
+      <div style="background:#fbf7ef;border:1px solid #ece3d2;border-radius:14px;padding:22px">
+        <h3 style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#8a8170;margin-bottom:14px">Cloud</h3>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <span style="font-size:15px;color:#3a352d;font-weight:500">AWS (EC2, RDS, S3)</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Oracle Cloud Infrastructure (ARM64 VMs)</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Docker &amp; Docker Compose</span>
+          <span style="font-size:15px;color:#3a352d;font-weight:500">Nginx</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" style="padding:72px 0;border-top:1px solid #e7ddcc">
+    <div class="pf-grid2" style="display:grid;grid-template-columns:0.55fr 1fr;gap:56px">
+      <div>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:40px;letter-spacing:-0.02em;margin-bottom:10px">Education</h2>
+        <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#8a8170">Education</p>
+        <div class="pf-panel" aria-hidden="true" style="margin-top:26px;animation-delay:-3.5s">
+          <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8a8170;margin-bottom:14px">// always learning</div>
+          <div class="pf-grid-cells" id="pf-contrib"></div>
+        </div>
+      </div>
+      <div>
+        <div style="padding:22px 0;border-top:1px solid #ece3d2;display:grid;grid-template-columns:110px 1fr;gap:28px">
+          <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8a8170;white-space:nowrap;padding-top:4px">2020 — 2024</div>
+          <div>
+            <h3 style="font-size:18px;font-weight:600;margin-bottom:2px">B.E. Computer Engineering</h3>
+            <p style="font-size:14px;color:var(--accent);font-weight:500;margin-bottom:6px">Vasantdada Patil Pratishthan's College Of Engineering And Visual Arts, Mumbai, Maharashtra</p>
+            <p style="font-size:13px;color:#4a7a3a;font-weight:600;font-family:'Spline Sans Mono',monospace;margin-bottom:12px">CGPA: 8.70</p>
+            <p style="font-size:15px;color:#544d42">Served as Sports Secretary, leading the college's flagship Sportivo event, while actively participating in multiple college and departmental hackathons.</p>
+          </div>
+        </div>
+        <div style="padding:22px 0;border-top:1px solid #ece3d2;display:grid;grid-template-columns:110px 1fr;gap:28px">
+          <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8a8170;white-space:nowrap;padding-top:4px">2020</div>
+          <div>
+            <h3 style="font-size:18px;font-weight:600;margin-bottom:2px">Higher Secondary (Science)</h3>
+            <p style="font-size:14px;color:var(--accent);font-weight:500;margin-bottom:12px">Vidyamandir Highschool and Junior College, Islampur, Maharashtra</p>
+            <p style="font-size:15px;color:#544d42">Built a strong foundation in Mathematics, Physics, and Computer Science, which sparked my passion for software engineering.</p>
+          </div>
+        </div>
+        <div style="padding:22px 0;border-top:1px solid #ece3d2;display:grid;grid-template-columns:110px 1fr;gap:28px">
+          <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8a8170;white-space:nowrap;padding-top:4px">2018</div>
+          <div>
+            <h3 style="font-size:18px;font-weight:600;margin-bottom:2px">CBSE</h3>
+            <p style="font-size:14px;color:var(--accent);font-weight:500;margin-bottom:12px">Prakash Public School, Islampur, Maharashtra</p>
+            <p style="font-size:15px;color:#544d42">Balanced academics and athletics by winning two District and two Taluka football championships, competing at the Division level, and receiving recognition in the Hindi Olympiad.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="padding:80px 0 40px;border-top:1px solid #e7ddcc">
+    <div class="pf-grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end">
+      <div>
+        <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#8a8170;margin-bottom:16px">Contact</p>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:48px;letter-spacing:-0.02em;line-height:1.05;margin-bottom:18px">Let's create something impactful.</h2>
+        <p style="font-size:17px;color:#544d42;max-width:42ch">Open to full-stack software engineering opportunities where I can build scalable products, drive innovation, and solve meaningful business problems with AI.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <a href="https://linkedin.com/in/raj-dubal" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:18px 4px;border-top:1px solid #e7ddcc;font-size:17px;font-weight:500">LinkedIn <span style="font-family:'Spline Sans Mono',monospace;font-size:13px;color:#8a8170">raj-dubal ↗</span></a>
+        <a href="https://leetcode.com/u/0x1zen/" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:18px 4px;border-top:1px solid #e7ddcc;font-size:17px;font-weight:500">LeetCode <span style="font-family:'Spline Sans Mono',monospace;font-size:13px;color:#8a8170">0x1zen ↗</span></a>
+        <a href="https://github.com/0x1zen" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:18px 4px;border-top:1px solid #e7ddcc;border-bottom:1px solid #e7ddcc;font-size:17px;font-weight:500">GitHub <span style="font-family:'Spline Sans Mono',monospace;font-size:13px;color:#8a8170">0x1zen ↗</span></a>
+      </div>
+    </div>
+    <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#a89c86;margin-top:56px">© 2026 Raj Dubal — Full-Stack Developer</p>
+  </section>
+
+</main>
+
+<script>
+  // Scrollspy
+  const sections = ['about','experience','projects','ai','certifications','skills','education','contact'];
+  const links = document.querySelectorAll('.nav-link');
+
+  function setActive(id) {
+    links.forEach(link => {
+      const active = link.dataset.section === id;
+      link.style.color = active ? '#2a2620' : '#7a715f';
+      link.style.borderBottomColor = active ? 'var(--accent)' : 'transparent';
+    });
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+
+  // Project image carousels
+  document.querySelectorAll('.pf-carousel').forEach(carousel => {
+    const track = carousel.querySelector('.pf-carousel-track');
+    const slides = carousel.querySelectorAll('.pf-slide');
+    const dots = carousel.querySelectorAll('.pf-dot');
+    const count = slides.length;
+
+    function go(i) {
+      const idx = (i + count) % count;
+      carousel.dataset.index = idx;
+      track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+      dots.forEach((d, di) => d.classList.toggle('active', di === idx));
+    }
+
+    carousel.querySelector('.pf-arrow.prev').addEventListener('click', () => go(+carousel.dataset.index - 1));
+    carousel.querySelector('.pf-arrow.next').addEventListener('click', () => go(+carousel.dataset.index + 1));
+    dots.forEach((d, di) => d.addEventListener('click', () => go(di)));
+  });
+
+  // Education "always learning" contribution grid (animated)
+  (function () {
+    const grid = document.getElementById('pf-contrib');
+    if (!grid) return;
+    const cols = 12, rows = 4, total = cols * rows;
+    for (let i = 0; i < total; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'pf-cell';
+      const lit = Math.random();
+      // vary base tint + animation so the board shimmers organically
+      cell.style.background = lit > 0.55 ? '#6ba354' : (lit > 0.3 ? '#4a7a3a' : '#2f4a28');
+      cell.style.animationDelay = (-Math.random() * 3).toFixed(2) + 's';
+      cell.style.animationDuration = (2.4 + Math.random() * 2.2).toFixed(2) + 's';
+      grid.appendChild(cell);
+    }
+  })();
+</script>
+
+</body>
+</html>
