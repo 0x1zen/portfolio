@@ -15,12 +15,27 @@
   ::selection{background:#e8b48f;color:#2a2620}
   a{color:inherit}
   :root{--accent:#b5552f}
+  /* Nav: hamburger for tablet + mobile */
+  .pf-nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid #d9cdb8;border-radius:10px;background:rgba(247,241,231,0.6);color:#2a2620;cursor:pointer;padding:0}
+  .pf-nav-toggle span,.pf-nav-toggle span::before,.pf-nav-toggle span::after{content:'';display:block;width:18px;height:2px;background:#2a2620;border-radius:2px;transition:transform .2s,opacity .2s}
+  .pf-nav-toggle span{position:relative}
+  .pf-nav-toggle span::before{position:absolute;top:-6px}
+  .pf-nav-toggle span::after{position:absolute;top:6px}
+  .pf-nav-toggle.open span{background:transparent}
+  .pf-nav-toggle.open span::before{transform:translateY(6px) rotate(45deg)}
+  .pf-nav-toggle.open span::after{transform:translateY(-6px) rotate(-45deg)}
+  @media (max-width:960px){
+    .pf-nav-toggle{display:flex}
+    .pf-nav-links{display:none!important;position:absolute;top:calc(100% + 8px);right:16px;left:16px;flex-direction:column;align-items:stretch!important;gap:6px!important;background:#f7f1e7;border:1px solid #e7ddcc;border-radius:14px;padding:14px;box-shadow:0 12px 30px rgba(42,38,32,0.14)}
+    .pf-nav-links.open{display:flex!important}
+    .pf-nav-links .nav-link{padding:10px 10px!important;border-bottom:none!important;border-radius:8px}
+    .pf-nav-links a[href='#contact']{text-align:center;margin-top:4px}
+  }
   @media (max-width:760px){
-    .pf-nav-links{display:none!important}
     .pf-hero-h1{font-size:46px!important}
     .pf-grid2{grid-template-columns:1fr!important}
     .pf-hero{grid-template-columns:1fr!important;gap:40px!important}
-    .pf-avatar{order:-1}
+    .pf-avatar{order:-1;justify-self:center;width:240px}
     .pf-sec-head{flex-direction:column;align-items:flex-start!important;gap:4px}
     .pf-sec-head h2{font-size:34px!important}
     .pf-ai-card{padding:30px 20px!important}
@@ -77,12 +92,14 @@
 
 <!-- NAV -->
 <header style="position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(8px);background:rgba(247,241,231,0.82);border-bottom:1px solid #e7ddcc">
-  <nav style="max-width:1080px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between">
+  <nav style="position:relative;max-width:1080px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between">
     <a href="#top" style="text-decoration:none;display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-0.01em">
       <span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;font-family:'Spline Sans Mono',monospace;font-size:14px;font-weight:500">R</span>
       Raj Dubal
     </a>
-    <div class="pf-nav-links" style="display:flex;align-items:center;gap:30px">
+    <button class="pf-nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+    <div class="pf-nav-links" id="navLinks" style="display:flex;align-items:center;gap:30px">
+      <a href="#about"          class="nav-link" data-section="about"          style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">About</a>
       <a href="#experience"     class="nav-link" data-section="experience"     style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">Experience</a>
       <a href="#projects"       class="nav-link" data-section="projects"       style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">Personal Projects</a>
       <a href="#ai"             class="nav-link" data-section="ai"             style="text-decoration:none;font-size:14px;font-weight:500;color:#7a715f;border-bottom:1.5px solid transparent;padding-bottom:3px;transition:color .15s,border-color .15s">AI</a>
@@ -101,7 +118,7 @@
     <div>
       <p style="font-family:'Spline Sans Mono',monospace;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:22px">Full-Stack Developer</p>
       <h1 class="pf-hero-h1" style="font-family:'Newsreader',serif;font-weight:500;font-size:64px;line-height:1.05;letter-spacing:-0.02em;max-width:16ch;margin-bottom:26px">Building scalable web applications, powered by AI.</h1>
-      <p style="font-size:19px;max-width:52ch;color:#544d42;margin-bottom:36px">I'm Raj Dubal, an AWS Certified Full-Stack Software Engineer with <b>2+ years of experience</b> delivering scalable, business-critical applications for global financial institutions including <b>Vanguard, BlackRock, CME Group, J.P. Morgan, and Goldman Sachs</b>. Recognized for contributing to high-impact, revenue-driving solutions, including a <b>$3 trillion index delivery project</b> for the <b>London Stock Exchange Group (LSEG)</b>, by building reliable, AI-first software that creates measurable business value.
+      <p style="font-size:19px;max-width:52ch;color:#544d42;margin-bottom:36px">I'm Raj Dubal, a <b>AWS Certified</b> Full-Stack Software Engineer with <b>2+ years</b> of experience delivering scalable, business-critical applications. Recognized for leading high-impact, revenue-driving solutions including a <b>3 trillion USD</b> index delivery project for the London Stock Exchange Group (LSEG) through an AI-first engineering approach, building reliable software that creates measurable business value.
 </p>
       <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
         <a href="#projects" style="text-decoration:none;font-size:15px;font-weight:600;color:#fff;background:var(--accent);padding:12px 22px;border-radius:999px">View my work</a>
@@ -144,10 +161,7 @@
             <p style="font-size:15px;color:#544d42;margin-bottom:8px">Project:- <b>London Stock Exchange Group(LSEG) - Index Delivery Team</b></p>
             <ul style="font-size:15px;color:#544d42;padding-left:18px;display:flex;flex-direction:column;gap:6px">
               <li>
-  <b>Top performer</b> on a high-frequency engineering team, delivering <b>12 of the team's 19 project releases in Q1 2026</b> while consistently meeting aggressive <b>two-week production delivery timelines</b>.
-</li>
-              <li>
-  Delivered business-critical stock market index and financial data products for the London Stock Exchange Group (LSEG), serving global clients including <b>Vanguard, BlackRock, CME Group, J.P. Morgan, and Goldman Sachs</b>.
+  Delivered business-critical stock market index and financial data products for the <b>London Stock Exchange Group (LSEG)</b>, serving global clients including <b>Vanguard</b>, <b>BlackRock</b>, <b>J.P. Morgan</b>, and <b>CME Group</b>.
 </li>
 <li>
   Led the delivery of a <b>USD 3 trillion LSEG project</b>, driving high-impact business solutions through an AI-first engineering approach that accelerated delivery while ensuring reliability and operational excellence.
@@ -158,8 +172,9 @@
 </li>
 
 <li>
-  Owned the complete software development lifecycle from requirement analysis and development to testing, production deployment, and post-release support ensuring <b>high quality enterprise products.</b>
+  <b>2× Hexaware Award Winner</b> - Received the <b>Learning Ninja Award</b> for demonstrating a culture of continuous learning through <b>60+ hours of Udemy learning</b>, industry certifications, and active participation in company-wide ideathons and hackathons; awarded the <b>Topper's Award</b> for graduating as the <b>Best Performer</b> in the Hexaware Graduate Engineer Trainee Program.
 </li>
+
             </ul>
           </div>
         </div>
@@ -227,8 +242,6 @@
     <article class="pf-grid2 pf-proj-alt" style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;padding:36px 0;border-top:1px solid #ece3d2">
       <div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
-          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">React.js</span>
-          <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Tailwind Css</span>
           <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Node.js</span>
           <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">PostgreSQL</span>
           <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6c6354;border:1px solid #ddd0ba;padding:3px 9px;border-radius:999px">Redis</span>
@@ -243,10 +256,10 @@
         <h3 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;letter-spacing:-0.01em;margin-bottom:10px">Intern Flow — AI-Powered Internship Management</h3>
         <ul style="font-size:15px;color:#544d42;margin-bottom:16px;padding-left:18px;display:flex;flex-direction:column;gap:7px">
           <li>Built a 7-role internship pipeline (HR, Mentor, Referrer, IT, Security, Legal, Program Owner) with a stage-gated workflow engine enforcing valid transitions across an 8-stage happy-path lifecycle, from referral to certificate issuance</li>
-          <li>AI resume parsing with a dual-provider fallback chain - Anthropic Claude primary, Gemini Flash fallback - processed asynchronously via BullMQ with live status pushed to the client over SSE</li>
+          <li>AI resume parsing with a dual-provider fallback chain — Anthropic Claude primary, Gemini Flash fallback — processed asynchronously via BullMQ with live status pushed to the client over SSE</li>
           <li>NDA e-signature flow using single-use Redis tokens with 7-day TTL, advancing the workflow atomically on signature and firing role-scoped notifications on completion</li>
           <li>SLA monitoring with automatic breach detection and 3-tier escalation, backed by a startup recovery scan and 30-minute re-enqueue sweep so scheduled reminders survive Redis restarts or worker downtime</li>
-          <li>Real-time in-app notifications over WebSockets, grouped by referral and scoped per role, alongside a cost-optimized AI FAQ assistant that only invokes the LLM for 5 of 12 query types the rest resolve from parameterized SQL</li>
+          <li>Real-time in-app notifications over WebSockets, grouped by referral and scoped per role, alongside a cost-optimized AI FAQ assistant that only invokes the LLM for 5 of 12 query types — the rest resolve from parameterized SQL</li>
           <li>Migrated the self-hosted stack (Postgres, Redis, MinIO) from AWS (RDS/S3) to a bare-metal Oracle Cloud ARM64 VM via Docker Compose, isolating database roles and Docker bridge networking from a second production app on the same host</li>
         </ul>
         <a href="http://129.154.240.121:5100/" target="_blank" rel="noopener" style="display:inline-block;font-size:14px;font-weight:600;color:#fff;background:var(--accent);padding:9px 18px;border-radius:999px;text-decoration:none">See live ↗</a>
@@ -273,7 +286,7 @@
         <div style="margin-top:14px;border:1px solid #ddd0ba;border-radius:12px;padding:12px 14px;background:#faf5ec">
           <div style="font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7d68;margin-bottom:8px">Test credentials</div>
           <div style="display:flex;flex-direction:column;gap:4px;font-family:'Spline Sans Mono',monospace;font-size:12.5px;color:#544d42">
-            <div><span style="color:#8a7d68">Email:</span> rajubalwork@gmail.com</div>
+            <div><span style="color:#8a7d68">Email:</span> rajdubalwork@gmail.com</div>
             <div><span style="color:#8a7d68">Password:</span> TestPass123</div>
           </div>
         </div>
@@ -469,9 +482,22 @@
 
 </main>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Mobile / tablet nav menu
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    const closeMenu = () => { navLinks.classList.remove('open'); navToggle.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); };
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  }
+
   // Scrollspy
-  const sections = ['experience','projects','ai','certifications','skills','education','contact'];
+  const sections = ['about','experience','projects','ai','certifications','skills','education','contact'];
   const links = document.querySelectorAll('.nav-link');
 
   function setActive(id) {
