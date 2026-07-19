@@ -257,10 +257,10 @@
         <h3 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;letter-spacing:-0.01em;margin-bottom:10px">Intern Flow — AI-Powered Internship Management</h3>
         <ul style="font-size:15px;color:#544d42;margin-bottom:16px;padding-left:18px;display:flex;flex-direction:column;gap:7px">
           <li>Built a 7-role internship pipeline (HR, Mentor, Referrer, IT, Security, Legal, Program Owner) with a stage-gated workflow engine enforcing valid transitions across an 8-stage happy-path lifecycle, from referral to certificate issuance</li>
-          <li>AI resume parsing with a dual-provider fallback chain — Anthropic Claude primary, Gemini Flash fallback — processed asynchronously via BullMQ with live status pushed to the client over SSE</li>
+          <li>AI resume parsing with a dual-provider fallback chain - Anthropic Claude primary, Gemini Flash fallback - processed asynchronously via BullMQ with live status pushed to the client over SSE</li>
           <li>NDA e-signature flow using single-use Redis tokens with 7-day TTL, advancing the workflow atomically on signature and firing role-scoped notifications on completion</li>
           <li>SLA monitoring with automatic breach detection and 3-tier escalation, backed by a startup recovery scan and 30-minute re-enqueue sweep so scheduled reminders survive Redis restarts or worker downtime</li>
-          <li>Real-time in-app notifications over WebSockets, grouped by referral and scoped per role, alongside a cost-optimized AI FAQ assistant that only invokes the LLM for 5 of 12 query types — the rest resolve from parameterized SQL</li>
+          <li>Real-time in-app notifications over WebSockets, grouped by referral and scoped per role, alongside a cost-optimized AI FAQ assistant that only invokes the LLM for 5 of 12 query types - the rest resolve from parameterized SQL</li>
           <li>Migrated the self-hosted stack (Postgres, Redis, MinIO) from AWS (RDS/S3) to a bare-metal Oracle Cloud ARM64 VM via Docker Compose, isolating database roles and Docker bridge networking from a second production app on the same host</li>
         </ul>
         <a href="http://129.154.240.121:5100/" target="_blank" rel="noopener" style="display:inline-block;font-size:14px;font-weight:600;color:#fff;background:var(--accent);padding:9px 18px;border-radius:999px;text-decoration:none">See live ↗</a>
