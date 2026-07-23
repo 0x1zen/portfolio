@@ -41,6 +41,7 @@
     .pf-ai-card{padding:30px 20px!important}
     .pf-ai-card h2{font-size:32px!important}
     .pf-proj-alt > div:has(.pf-carousel){order:-1}
+    .vi-poster{transform:scale(0.78);transform-origin:center center}
   }
   /* Carousel */
   .pf-carousel{position:relative;aspect-ratio:1876/882;border-radius:14px;overflow:hidden;border:1px solid #ddd0ba;box-shadow:0 4px 18px rgba(42,38,32,0.08)}
@@ -84,7 +85,30 @@
   .pf-orbit span{position:absolute;top:-6px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(181,85,47,0.15)}
 
   @media (prefers-reduced-motion:reduce){
-    .pf-panel,.pf-scan::before,.pf-cur,.pf-cell,.pf-avatar-glow,.pf-avatar-ring,.pf-orbit{animation:none}
+    .pf-panel,.pf-scan::before,.pf-cur,.pf-cell,.pf-avatar-glow,.pf-avatar-ring,.pf-orbit,.vi-glow,.vi-ring,.vi-bar{animation:none}
+  }
+  /* Video intro */
+  @keyframes vi-pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.12);opacity:.85}}
+  @keyframes vi-spin{to{transform:rotate(360deg)}}
+  .vi-glow{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(232,180,143,0.55),transparent 70%);animation:vi-pulse 4s ease-in-out infinite}
+  .vi-ring{position:absolute;inset:-14px;border-radius:50%;border:1.5px dashed rgba(232,180,143,0.4);animation:vi-spin 22s linear infinite}
+  .vi-controls{position:absolute;bottom:0;left:0;right:0;padding:8px 14px 12px;background:linear-gradient(transparent,rgba(0,0,0,0.72));flex-direction:column;gap:6px;display:none;z-index:2}
+  .vi-progress{position:relative;height:4px;border-radius:2px;background:rgba(255,255,255,0.2);cursor:pointer;transition:height .15s}
+  .vi-progress:hover,.vi-progress.dragging{height:6px}
+  .vi-progress-fill{position:absolute;top:0;left:0;height:100%;width:0%;background:var(--accent);border-radius:inherit;pointer-events:none}
+  .vi-thumb{position:absolute;top:50%;left:0%;width:13px;height:13px;background:#fff;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .15s}
+  .vi-progress:hover .vi-thumb,.vi-progress.dragging .vi-thumb{opacity:1}
+  .vi-bottom{display:flex;align-items:center;gap:10px}
+  .vi-play-btn{background:none;border:none;color:#fff;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .vi-time{font-family:'Spline Sans Mono',monospace;font-size:11px;color:rgba(255,255,255,0.65);margin-left:auto;letter-spacing:0.03em}
+  .vi-vol-wrap{display:flex;align-items:center;gap:6px;margin-left:10px}
+  .vi-vol-slider{position:relative;width:64px;height:4px;border-radius:2px;background:rgba(255,255,255,0.2);cursor:pointer;transition:height .15s;flex-shrink:0}
+  .vi-vol-slider:hover,.vi-vol-slider.dragging{height:6px}
+  .vi-vol-fill{position:absolute;top:0;left:0;height:100%;width:100%;background:var(--accent);border-radius:inherit;pointer-events:none}
+  .vi-vol-thumb{position:absolute;top:50%;left:100%;width:13px;height:13px;background:#fff;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .15s}
+  .vi-vol-slider:hover .vi-vol-thumb,.vi-vol-slider.dragging .vi-vol-thumb{opacity:1}
+  @media(max-width:480px){.vi-vol-slider{width:44px}}
+  @media (prefers-reduced-motion:reduce){.vi-glow,.vi-ring{animation:none}
   }
 </style>
 </head>
@@ -178,6 +202,66 @@
 
             </ul>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO INTRO -->
+  <section id="intro" style="padding:72px 0;border-top:1px solid #e7ddcc">
+    <div class="pf-ai-card" style="background:#2a2620;color:#f3ead9;border-radius:22px;padding:56px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 50% 8%,rgba(181,85,47,0.35),transparent 55%);pointer-events:none"></div>
+      <div style="position:relative;text-align:center;max-width:620px;margin:0 auto 34px">
+        <p style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#e8b48f;margin:0 0 16px">Press play</p>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:42px;line-height:1.06;letter-spacing:-0.02em;margin:0 0 14px">A quick hello, before the code.</h2>
+        <p style="font-size:16px;color:#cbbfa9;margin:0">A 60-second introduction to my experience, technical skills, and software engineering journey.</p>
+      </div>
+      <div id="viPlayer" class="vi-player" style="position:relative;max-width:820px;margin:0 auto;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid rgba(232,180,143,0.25);background:#211d18;background-image:repeating-linear-gradient(135deg,#221e18 0 16px,#2b261f 16px 32px);cursor:pointer;display:flex;align-items:center;justify-content:center">
+        <video id="introVideo" src="RAJ_INTRO_VIDEO.mp4" playsinline preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none"></video>
+        <div id="viControls" class="vi-controls">
+          <div id="viProgress" class="vi-progress">
+            <div id="viProgressFill" class="vi-progress-fill"></div>
+            <div id="viThumb" class="vi-thumb"></div>
+          </div>
+          <div class="vi-bottom">
+            <button id="viPlayBtn" class="vi-play-btn" aria-label="Pause">
+              <svg id="viIconPlay" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:none"><path d="M6 4l11 6-11 6V4z" fill="#fff"/></svg>
+              <svg id="viIconPause" width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="3" width="4" height="14" rx="1.5" fill="#fff"/><rect x="12" y="3" width="4" height="14" rx="1.5" fill="#fff"/></svg>
+            </button>
+            <span id="viTime" class="vi-time">0:00 / 0:00</span>
+            <div class="vi-vol-wrap">
+              <button id="viVolBtn" class="vi-play-btn" aria-label="Mute">
+                <svg id="viVolHigh" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M3 7.5h3L11 4v12l-5-3.5H3V7.5z" fill="#fff"/>
+                  <path d="M13.5 6.5a4 4 0 010 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                  <path d="M15.5 4a7.5 7.5 0 010 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                </svg>
+                <svg id="viVolLow" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:none">
+                  <path d="M3 7.5h3L11 4v12l-5-3.5H3V7.5z" fill="#fff"/>
+                  <path d="M13.5 6.5a4 4 0 010 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                </svg>
+                <svg id="viVolMute" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:none">
+                  <path d="M3 7.5h3L11 4v12l-5-3.5H3V7.5z" fill="#fff"/>
+                  <line x1="13" y1="7" x2="17" y2="13" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="17" y1="7" x2="13" y2="13" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <div id="viVolSlider" class="vi-vol-slider">
+                <div id="viVolFill" class="vi-vol-fill"></div>
+                <div id="viVolThumb" class="vi-vol-thumb"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="vi-poster" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:16px">
+          <span style="position:relative;display:flex;align-items:center;justify-content:center;width:88px;height:88px">
+            <span class="vi-glow"></span>
+            <span class="vi-ring"></span>
+            <span style="position:relative;display:flex;align-items:center;justify-content:center;width:76px;height:76px;border-radius:50%;background:var(--accent);box-shadow:0 10px 30px rgba(0,0,0,0.4)">
+              <span style="width:0;height:0;border-left:22px solid #fff;border-top:14px solid transparent;border-bottom:14px solid transparent;margin-left:6px"></span>
+            </span>
+          </span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:rgba(255,255,255,0.75)">&#9655; click to watch &middot; ~1 min</span>
         </div>
       </div>
     </div>
@@ -536,6 +620,183 @@
     carousel.querySelector('.pf-arrow.next').addEventListener('click', () => go(+carousel.dataset.index + 1));
     dots.forEach((d, di) => d.addEventListener('click', () => go(di)));
   });
+
+  // Video intro
+  const viPlayer = document.getElementById('viPlayer');
+  if (viPlayer) {
+    const introVideo    = document.getElementById('introVideo');
+    const viPoster      = viPlayer.querySelector('.vi-poster');
+    const viControls    = document.getElementById('viControls');
+    const viProgressEl  = document.getElementById('viProgress');
+    const viProgressFill= document.getElementById('viProgressFill');
+    const viThumb       = document.getElementById('viThumb');
+    const viPlayBtn     = document.getElementById('viPlayBtn');
+    const viIconPlay    = document.getElementById('viIconPlay');
+    const viIconPause   = document.getElementById('viIconPause');
+    const viTimeEl      = document.getElementById('viTime');
+    const viVolBtn      = document.getElementById('viVolBtn');
+    const viVolHigh     = document.getElementById('viVolHigh');
+    const viVolLow      = document.getElementById('viVolLow');
+    const viVolMute     = document.getElementById('viVolMute');
+    const viVolSlider   = document.getElementById('viVolSlider');
+    const viVolFill     = document.getElementById('viVolFill');
+    const viVolThumb    = document.getElementById('viVolThumb');
+
+    function fmt(s) {
+      const m = Math.floor(s / 60);
+      return m + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+    }
+
+    function syncPlayIcon(playing) {
+      viIconPlay.style.display  = playing ? 'none' : '';
+      viIconPause.style.display = playing ? ''     : 'none';
+      viPlayBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    }
+
+    function syncProgress() {
+      if (!introVideo.duration) return;
+      const pct = (introVideo.currentTime / introVideo.duration) * 100;
+      viProgressFill.style.width = pct + '%';
+      viThumb.style.left         = pct + '%';
+      viTimeEl.textContent = fmt(introVideo.currentTime) + ' / ' + fmt(introVideo.duration);
+    }
+
+    function showVideo() {
+      introVideo.style.display  = 'block';
+      viPoster.style.display    = 'none';
+      viControls.style.display  = 'flex';
+    }
+
+    function restorePoster() {
+      introVideo.style.display  = 'none';
+      introVideo.currentTime    = 0;
+      viPoster.style.display    = '';
+      viControls.style.display  = 'none';
+      syncPlayIcon(false);
+      viProgressFill.style.width = '0%';
+      viThumb.style.left         = '0%';
+      viTimeEl.textContent = '0:00 / 0:00';
+    }
+
+    // Click on video area (not controls) → play/pause or start
+    viPlayer.addEventListener('click', (e) => {
+      if (e.target.closest('#viControls')) return;
+      if (introVideo.style.display === 'none') {
+        showVideo(); introVideo.play();
+      } else if (introVideo.paused) {
+        introVideo.play();
+      } else {
+        introVideo.pause();
+      }
+    });
+
+    // Play/pause button
+    viPlayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      introVideo.paused ? introVideo.play() : introVideo.pause();
+    });
+
+    // Volume
+    function syncVolume() {
+      const muted = introVideo.muted || introVideo.volume === 0;
+      const vol   = introVideo.volume;
+      viVolHigh.style.display = (!muted && vol >= 0.5) ? '' : 'none';
+      viVolLow.style.display  = (!muted && vol > 0 && vol < 0.5) ? '' : 'none';
+      viVolMute.style.display = muted ? '' : 'none';
+      viVolBtn.setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
+      const pct = muted ? 0 : vol * 100;
+      viVolFill.style.width  = pct + '%';
+      viVolThumb.style.left  = pct + '%';
+    }
+
+    viVolBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      introVideo.muted = !introVideo.muted;
+      syncVolume();
+    });
+
+    let volDragging = false;
+    function applyVol(clientX) {
+      const rect = viVolSlider.getBoundingClientRect();
+      const pct  = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      introVideo.volume = pct;
+      introVideo.muted  = pct === 0;
+      syncVolume();
+    }
+
+    viVolSlider.addEventListener('mousedown', (e) => {
+      e.stopPropagation(); volDragging = true;
+      viVolSlider.classList.add('dragging'); applyVol(e.clientX);
+    });
+    viVolSlider.addEventListener('touchstart', (e) => {
+      e.stopPropagation(); volDragging = true;
+      viVolSlider.classList.add('dragging'); applyVol(e.touches[0].clientX);
+    }, { passive: true });
+    document.addEventListener('mousemove',  (e) => { if (volDragging) applyVol(e.clientX); });
+    document.addEventListener('touchmove',  (e) => { if (volDragging) applyVol(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('mouseup',    ()  => { volDragging = false; viVolSlider.classList.remove('dragging'); });
+    document.addEventListener('touchend',   ()  => { volDragging = false; viVolSlider.classList.remove('dragging'); });
+
+    introVideo.addEventListener('volumechange', syncVolume);
+
+    introVideo.addEventListener('play',            () => syncPlayIcon(true));
+    introVideo.addEventListener('pause',           () => syncPlayIcon(false));
+    introVideo.addEventListener('timeupdate',      syncProgress);
+    introVideo.addEventListener('loadedmetadata',  syncProgress);
+    introVideo.addEventListener('ended',           restorePoster);
+
+    // Progress bar seeking (mouse + touch)
+    let seeking = false;
+
+    function applySeek(clientX) {
+      const rect = viProgressEl.getBoundingClientRect();
+      const pct  = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      if (introVideo.duration) introVideo.currentTime = pct * introVideo.duration;
+      syncProgress();
+    }
+
+    viProgressEl.addEventListener('mousedown', (e) => {
+      e.stopPropagation(); seeking = true;
+      viProgressEl.classList.add('dragging');
+      applySeek(e.clientX);
+    });
+    viProgressEl.addEventListener('touchstart', (e) => {
+      e.stopPropagation(); seeking = true;
+      viProgressEl.classList.add('dragging');
+      applySeek(e.touches[0].clientX);
+    }, { passive: true });
+
+    document.addEventListener('mousemove',  (e) => { if (seeking) applySeek(e.clientX); });
+    document.addEventListener('touchmove',  (e) => { if (seeking) applySeek(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('mouseup',    ()  => { seeking = false; viProgressEl.classList.remove('dragging'); });
+    document.addEventListener('touchend',   ()  => { seeking = false; viProgressEl.classList.remove('dragging'); });
+
+    // Auto-generate thumbnail from video first frame and apply as poster background
+    (function () {
+      const thumb = document.createElement('video');
+      thumb.src = 'RAJ_INTRO_VIDEO.mp4';
+      thumb.preload = 'metadata';
+      thumb.muted = true;
+      thumb.playsInline = true;
+      thumb.style.display = 'none';
+      document.body.appendChild(thumb);
+      thumb.addEventListener('loadedmetadata', () => { thumb.currentTime = 0.5; });
+      thumb.addEventListener('seeked', () => {
+        try {
+          const c = document.createElement('canvas');
+          c.width = thumb.videoWidth;
+          c.height = thumb.videoHeight;
+          c.getContext('2d').drawImage(thumb, 0, 0);
+          viPlayer.style.backgroundImage = 'url(' + c.toDataURL('image/jpeg', 0.9) + ')';
+          viPlayer.style.backgroundSize = 'cover';
+          viPlayer.style.backgroundPosition = 'center';
+          viPlayer.style.backgroundRepeat = 'no-repeat';
+        } catch (err) { /* cross-origin or file:// blocked — striped bg stays */ }
+        thumb.src = '';
+        thumb.remove();
+      }, { once: true });
+    })();
+  }
 
   // Education "always learning" contribution grid (animated)
   (function () {
